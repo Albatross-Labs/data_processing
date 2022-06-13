@@ -17,7 +17,7 @@ def text_normalize(text):
     text = soup.get_text()
 
     text=re.sub('https://.*', ' ', text) #https://로 시작하는 주소들 지우기
-    #text = re.sub('\W', ' ', text)  # 문장 부호 및 특수문자 지우기
+    text = re.sub('\W', ' ', text)  # 문장 부호 및 특수문자 지우기
 
     '''
     #의미없게 반복되는 것 삭제
@@ -25,7 +25,7 @@ def text_normalize(text):
     text=repeat_normalize(text)
     '''
 
-    text = re.sub('([ㄱ-ㅎㅏ-ㅣ]+)', ' ', text)  # 한글 자음, 한글 모음
+    text = re.sub('([ㄱ-ㅎㅏ-ㅣ]+)', ' ', text)  # 한글 자음, 한글 모음 삭제
     emoji_pattern = re.compile("["
                                u"\U0001F600-\U0001F64F"  # emoticons
                                u"\U0001F300-\U0001F5FF"  # symbols & pictographs
@@ -68,6 +68,6 @@ for file in files:
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
 
-    with open(f'{output_dir}/normalize_da_{file}', 'w', encoding='utf-8') as fw: #sentiment인지, 화행인지, 주제인지 먼저 보기
+    with open(f'{output_dir}/normalize_second_theme_{file}', 'w', encoding='utf-8') as fw: #sentiment인지, 화행인지, 주제인지 먼저 보기
         json.dump(json_file, fw, indent=4, ensure_ascii=False)
 
